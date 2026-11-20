@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="DChurch">
+  <defs>
+    <linearGradient id="dchurch-glass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E3E7DC"/>
+      <stop offset="100%" stop-color="#C3CDC0"/>
+    </linearGradient>
+    <filter id="dchurch-soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+  </defs>
+
+  <!-- 柔光层：不透明度 12%，无描边 -->
+  <g filter="url(#dchurch-soft)" opacity="0.12" fill="#CBD6C8">
+    <path d="M256 120 L381 222 L371 232 L371 395 L287 395 L287 331 A31 31 0 0 0 225 331 L225 395 L141 395 L141 232 L131 222 Z"/>
+    <path d="M253 58 h6 v64 h-6 Z M230 82 h52 v6 h-52 Z"/>
+  </g>
+
+  <!-- 玻璃体：单一明度过渡 -->
+  <g fill="url(#dchurch-glass)">
+    <path d="M256 120 L381 222 L371 232 L371 395 L287 395 L287 331 A31 31 0 0 0 225 331 L225 395 L141 395 L141 232 L131 222 Z"/>
+    <path d="M253 58 h6 v64 h-6 Z M230 82 h52 v6 h-52 Z"/>
+  </g>
+</svg>

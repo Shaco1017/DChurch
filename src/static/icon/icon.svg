@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E6EADF"/><stop offset="100%" stop-color="#C3CDC0"/>
+    </linearGradient>
+    <radialGradient id="bg" cx="50%" cy="38%" r="78%">
+      <stop offset="0%" stop-color="#22272A"/><stop offset="60%" stop-color="#191C1E"/><stop offset="100%" stop-color="#131517"/>
+    </radialGradient>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="17"/></filter>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <g transform="translate(256 256) scale(1.15) translate(-256 -226.5)"><g filter="url(#soft)" opacity="0.12" fill="#CBD6C8"><path d="M256 120 L381 222 L371 232 L371 395 L287 395 L287 331 A31 31 0 0 0 225 331 L225 395 L141 395 L141 232 L131 222 Z"/><path d="M253 58 h6 v64 h-6 Z M230 82 h52 v6 h-52 Z"/></g><g fill="url(#glass)"><path d="M256 120 L381 222 L371 232 L371 395 L287 395 L287 331 A31 31 0 0 0 225 331 L225 395 L141 395 L141 232 L131 222 Z"/><path d="M253 58 h6 v64 h-6 Z M230 82 h52 v6 h-52 Z"/></g></g>
+</svg>

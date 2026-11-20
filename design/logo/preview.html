@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DChurch Logo 方案对比</title>
+<style>
+  :root {
+    --bg: #f4f4f1;
+    --card: #ffffff;
+    --text: #17181a;
+    --text-2: #6e7178;
+    --text-3: #a3a6ac;
+    --line: #ebebe7;
+    --fill: #f1f1ed;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 48px 24px 80px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+      "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  header { margin-bottom: 36px; }
+  h1 { margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.01em; }
+  .sub { margin-top: 10px; font-size: 14px; color: var(--text-2); line-height: 1.7; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 20px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    overflow: hidden;
+  }
+  .stage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 34px 24px;
+    background: #fff;
+  }
+  .stage img { width: 190px; height: 190px; display: block; border-radius: 14px; }
+  .meta { padding: 18px 20px 22px; border-top: 1px solid var(--line); }
+  .tag {
+    display: inline-block;
+    margin-bottom: 10px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--fill);
+    color: var(--text-2);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+  .name { margin: 0 0 6px; font-size: 16px; font-weight: 600; }
+  .desc { margin: 0; font-size: 13px; line-height: 1.75; color: var(--text-2); }
+  .sizes {
+    display: flex;
+    align-items: flex-end;
+    gap: 18px;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--line);
+  }
+  .sizes figure { margin: 0; text-align: center; }
+  .sizes img { display: block; border-radius: 5px; }
+  .sizes figcaption { margin-top: 6px; font-size: 10px; color: var(--text-3); }
+  .subhead {
+    margin: 54px 0 20px;
+    padding-top: 34px;
+    border-top: 1px solid var(--line);
+  }
+  .subhead h2 { margin: 0; font-size: 22px; font-weight: 600; }
+  .subhead p { margin: 8px 0 0; font-size: 13px; line-height: 1.75; color: var(--text-2); }
+  .matrix {
+    margin-top: 22px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    overflow-x: auto;
+  }
+  .matrix table { width: 100%; border-collapse: collapse; min-width: 900px; }
+  .matrix th, .matrix td {
+    padding: 14px 16px;
+    text-align: left;
+    vertical-align: top;
+    font-size: 12.5px;
+    line-height: 1.7;
+    border-bottom: 1px solid var(--line);
+  }
+  .matrix th {
+    font-weight: 600;
+    color: var(--text-2);
+    background: #fafaf7;
+    white-space: nowrap;
+  }
+  .matrix td:first-child { font-weight: 600; white-space: nowrap; }
+  .matrix tr:last-child td { border-bottom: none; }
+  .lv { display: inline-block; padding: 1px 8px; border-radius: 999px; background: var(--fill); font-size: 11px; white-space: nowrap; }
+
+  .notes {
+    margin-top: 26px;
+    padding: 22px 24px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+  }
+  .notes h2 { margin: 0 0 12px; font-size: 14px; font-weight: 600; }
+  .notes ul { margin: 0; padding-left: 18px; }
+  .notes li { font-size: 13px; line-height: 1.85; color: var(--text-2); }
+  .dark-check {
+    margin-top: 22px;
+    padding: 24px;
+    border-radius: 18px;
+    background: #17181a;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    flex-wrap: wrap;
+  }
+  .dark-check span { color: #a3a6ac; font-size: 12px; }
+  .dark-check img { width: 64px; height: 64px; border-radius: 12px; display: block; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>DChurch · Logo 方案</h1>
+    <p class="sub">
+      六套方向，其中 A–E 为单色线稿 / 剪影方向，F 为 3D 材质方向。每张卡片下方附 64 / 40 / 24 像素实际尺寸预览，
+      用于检查缩小后的识别度。方案 F 的四个扩展方向见页面下半部分。
+    </p>
+  </header>
+
+  <div class="grid">
+    <article class="card">
+      <div class="stage"><img src="option-a-arch-calendar.jpg" alt="方案 A" /></div>
+      <div class="meta">
+        <span class="tag">方案 A · 线稿</span>
+        <h3 class="name">拱窗日历</h3>
+        <p class="desc">哥特尖拱当作窗框，内部直接是一张月历网格，顶部三点标注「有事项的日子」。日程语义最强，字形最干净。</p>
+        <div class="sizes">
+          <figure><img src="option-a-arch-calendar.jpg" width="64" height="64" alt="" /><figcaption>64px</figcaption></figure>
+          <figure><img src="option-a-arch-calendar.jpg" width="40" height="40" alt="" /><figcaption>40px</figcaption></figure>
+          <figure><img src="option-a-arch-calendar.jpg" width="24" height="24" alt="" /><figcaption>24px</figcaption></figure>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="stage"><img src="option-b-chapel-check.jpg" alt="方案 B" /></div>
+      <div class="meta">
+        <span class="tag">方案 B · 剪影</span>
+        <h3 class="name">教堂对勾</h3>
+        <p class="desc">实心小教堂剪影，门洞做成一个对勾，把「礼拜」与「完成」压进同一个形。缩到极小尺寸仍然立得住。</p>
+        <div class="sizes">
+          <figure><img src="option-b-chapel-check.jpg" width="64" height="64" alt="" /><figcaption>64px</figcaption></figure>
+          <figure><img src="option-b-chapel-check.jpg" width="40" height="40" alt="" /><figcaption>40px</figcaption></figure>
+          <figure><img src="option-b-chapel-check.jpg" width="24" height="24" alt="" /><figcaption>24px</figcaption></figure>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="stage"><img src="option-c-monogram-d.jpg" alt="方案 C" /></div>
+      <div class="meta">
+        <span class="tag">方案 C · 字标</span>
+        <h3 class="name">D 字立柱</h3>
+        <p class="desc">单线大写 D，竖画向上延伸成十字架立柱。品牌字母识别度最高，适合做「图标 + DChurch 字标」的组合锁定。</p>
+        <div class="sizes">
+          <figure><img src="option-c-monogram-d.jpg" width="64" height="64" alt="" /><figcaption>64px</figcaption></figure>
+          <figure><img src="option-c-monogram-d.jpg" width="40" height="40" alt="" /><figcaption>40px</figcaption></figure>
+          <figure><img src="option-c-monogram-d.jpg" width="24" height="24" alt="" /><figcaption>24px</figcaption></figure>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="stage"><img src="option-d-circular-emblem.jpg" alt="方案 D" /></div>
+      <div class="meta">
+        <span class="tag">方案 D · 双色徽章</span>
+        <h3 class="name">圆形徽章</h3>
+        <p class="desc">鼠尾草绿拱门 + 细十字，内部沙色日历格。全套里唯一的双色方案，气质温和，最不"宗教压迫"，适配浅色 UI。</p>
+        <div class="sizes">
+          <figure><img src="option-d-circular-emblem.jpg" width="64" height="64" alt="" /><figcaption>64px</figcaption></figure>
+          <figure><img src="option-d-circular-emblem.jpg" width="40" height="40" alt="" /><figcaption>40px</figcaption></figure>
+          <figure><img src="option-d-circular-emblem.jpg" width="24" height="24" alt="" /><figcaption>24px</figcaption></figure>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="stage"><img src="option-e-book-arch.jpg" alt="方案 E" /></div>
+      <div class="meta">
+        <span class="tag">方案 E · 极简</span>
+        <h3 class="name">拱顶一点</h3>
+        <p class="desc">一道拱、一条基线、一个点，是六套里最抽象最小化的一版。不做图标而做"标记"，适合直接与字标并排使用。</p>
+        <div class="sizes">
+          <figure><img src="option-e-book-arch.jpg" width="64" height="64" alt="" /><figcaption>64px</figcaption></figure>
+          <figure><img src="option-e-book-arch.jpg" width="40" height="40" alt="" /><figcaption>40px</figcaption></figure>
+          <figure><img src="option-e-book-arch.jpg" width="24" height="24" alt="" /><figcaption>24px</figcaption></figure>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="stage"><img src="option-f-clay-3d.jpg" alt="方案 F" /></div>
+      <div class="meta">
+        <span class="tag">方案 F · 3D 黏土</span>
+        <h3 class="name">黏土礼拜堂</h3>
+        <p class="desc">灰绿色哑光 3D 小教堂，柔和投影。更适合应用商店配图、启动页与宣传物料，不适合作为 24px 系统图标。</p>
+        <div class="sizes">
+          <figure><img src="option-f-clay-3d.jpg" width="64" height="64" alt="" /><figcaption>64px</figcaption></figure>
+          <figure><img src="option-f-clay-3d.jpg" width="40" height="40" alt="" /><figcaption>40px</figcaption></figure>
+          <figure><img src="option-f-clay-3d.jpg" width="24" height="24" alt="" /><figcaption>24px</figcaption></figure>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <div class="subhead">
+    <h2>方案 F 的四个扩展方向</h2>
+    <p>
+      保持 F 的「哑光黏土单件小教堂 + 米色工作室背景 + 极简构图」基调，在呈现技术、场景承载和应用侧重上拉开差距。
+      四者不是并列美化，而是分别服务不同的落地目标：图标可用性、品牌叙事、可矢量化与周边延展、深色高端定位。
+    </p>
+  </div>
+
+  <div class="grid">
+    <article class="card">
+      <div class="stage"><img src="f1-clay-icon.jpg" alt="扩展 F1" /></div>
+      <div class="meta">
+        <span class="tag">F1 · 图标化收敛</span>
+        <h3 class="name">正面黏土小屋</h3>
+        <p class="desc">改为正面略侧视、形体压扁加厚，拱形门洞作为唯一负空间。目的只有一个：让它在 24–48px 下仍是"一间有门的屋子"。</p>
+        <div class="sizes">
+          <figure><img src="f1-clay-icon.jpg" width="64" height="64" alt="" /><figcaption>64px</figcaption></figure>
+          <figure><img src="f1-clay-icon.jpg" width="40" height="40" alt="" /><figcaption>40px</figcaption></figure>
+          <figure><img src="f1-clay-icon.jpg" width="24" height="24" alt="" /><figcaption>24px</figcaption></figure>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="stage"><img src="f2-isometric-plinth.jpg" alt="扩展 F2" /></div>
+      <div class="meta">
+        <span class="tag">F2 · 场景承载</span>
+        <h3 class="name">沙色台座微缩</h3>
+        <p class="desc">加一层圆形沙色台座，木色十字与屋身形成双材质对照，等距视角让它像一件可以摆在桌上的物件。叙事感最强。</p>
+        <div class="sizes">
+          <figure><img src="f2-isometric-plinth.jpg" width="64" height="64" alt="" /><figcaption>64px</figcaption></figure>
+          <figure><img src="f2-isometric-plinth.jpg" width="40" height="40" alt="" /><figcaption>40px</figcaption></figure>
+          <figure><img src="f2-isometric-plinth.jpg" width="24" height="24" alt="" /><figcaption>24px</figcaption></figure>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="stage"><img src="f3-paper-cut.jpg" alt="扩展 F3" /></div>
+      <div class="meta">
+        <span class="tag">F3 · 纸雕层叠</span>
+        <h3 class="name">分层卡纸屋顶</h3>
+        <p class="desc">把黏土的体积感换成可拆分的纸层：绿色屋顶三层错位堆叠，牛皮纸屋身。天然适合转成 SVG 分层，也方便做印刷与实体周边。</p>
+        <div class="sizes">
+          <figure><img src="f3-paper-cut.jpg" width="64" height="64" alt="" /><figcaption>64px</figcaption></figure>
+          <figure><img src="f3-paper-cut.jpg" width="40" height="40" alt="" /><figcaption>40px</figcaption></figure>
+          <figure><img src="f3-paper-cut.jpg" width="24" height="24" alt="" /><figcaption>24px</figcaption></figure>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="stage"><img src="f4-frosted-glass.jpg" alt="扩展 F4" /></div>
+      <div class="meta">
+        <span class="tag">F4 · 深色材质</span>
+        <h3 class="name">磨砂玻璃微光</h3>
+        <p class="desc">同样的单件小教堂换成鼠尾草绿磨砂玻璃，内部透出暖光，落在近黑背景上。唯一自带深色模式的方案，气质转向安静、克制。</p>
+        <div class="sizes">
+          <figure><img src="f4-frosted-glass.jpg" width="64" height="64" alt="" /><figcaption>64px</figcaption></figure>
+          <figure><img src="f4-frosted-glass.jpg" width="40" height="40" alt="" /><figcaption>40px</figcaption></figure>
+          <figure><img src="f4-frosted-glass.jpg" width="24" height="24" alt="" /><figcaption>24px</figcaption></figure>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <div class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>方案</th>
+          <th>侧重</th>
+          <th>适用场景</th>
+          <th>优势</th>
+          <th>权衡</th>
+          <th>复杂度</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>F1 正面黏土小屋</td>
+          <td>图标可用性</td>
+          <td>应用图标、tabBar、通知图标、商店图标</td>
+          <td>形最简、负空间干净；一套渲染即可覆盖 1024→24 全尺寸；最接近"就这么用"的状态</td>
+          <td>叙事性弱于 F2；米色底需去掉才能用于深色系统栏；细微黏土纹理在缩小后会丢</td>
+          <td><span class="lv">低</span></td>
+        </tr>
+        <tr>
+          <td>F2 沙色台座微缩</td>
+          <td>品牌叙事</td>
+          <td>启动页、商店配图、关于页插画、宣传物料</td>
+          <td>有台座和双材质，画面完整度高；可延展成一组"同一台座上的不同物件"的系列图</td>
+          <td>细节多，24px 下台座与屋身糊成一块；必须额外裁一版纯图标，等于两套资产</td>
+          <td><span class="lv">中</span></td>
+        </tr>
+        <tr>
+          <td>F3 分层卡纸屋顶</td>
+          <td>可矢量化 / 周边</td>
+          <td>网页 logo、印刷品、贴纸与实体周边、浅色 UI</td>
+          <td>结构本身就是分离图层，能直接转 SVG 分层并保留投影；缩放无损，做单色版只需合并路径</td>
+          <td>当前生成稿缺少十字，需要补；侧视角下门洞不可见，语义靠屋顶形状支撑</td>
+          <td><span class="lv">中</span></td>
+        </tr>
+        <tr>
+          <td>F4 磨砂玻璃微光</td>
+          <td>深色 / 高端</td>
+          <td>深色模式图标、夜间启动页、高客单定位的品牌页</td>
+          <td>唯一自带深色背景，暗色环境里光感突出；材质语言现代，与"安静专注"的产品调性契合</td>
+          <td>浅色 UI 里需要另行重做浅色版本；玻璃需真实 3D 渲染，AI 出图难以逐尺寸稳定复现</td>
+          <td><span class="lv">中高</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="notes">
+    <h2>选择时需要知道的几点</h2>
+    <ul>
+      <li>十张都是 1920×1920 的位图概念稿，背景带底色（F4 为深色底）。选定后需要用矢量（SVG）或真实 3D 场景重做，才能输出透明 PNG、多尺寸图标和单色反白版本。</li>
+      <li>A、B、E 三套纯黑线稿缩小后表现最好；D 在 24px 时细线会糊，需要加粗线条或做「小尺寸专用简化版」。</li>
+      <li>C 的字母 D 目前偏小写形态、十字与字身有断层，属于 AI 生成偏差，选定后需要重画比例。</li>
+      <li>F 为渲染素材，不做逐尺寸缩放，只用于大尺寸展示场景。</li>
+    </ul>
+    <div class="dark-check">
+      <img src="option-a-arch-calendar.jpg" alt="" />
+      <img src="option-b-chapel-check.jpg" alt="" />
+      <img src="option-d-circular-emblem.jpg" alt="" />
+      <span>深色背景下的现状：米色底会露出方形边界，重绘为透明底后即可反白使用。</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,106 @@
+{
+  "pages": [
+    {
+      "path": "pages/calendar/index",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "日程",
+        "backgroundColor": "#F4F4F1"
+      }
+    },
+    {
+      "path": "pages/todo/index",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "待办",
+        "backgroundColor": "#F4F4F1"
+      }
+    },
+    {
+      "path": "pages/mine/index",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "我的",
+        "backgroundColor": "#F4F4F1"
+      }
+    },
+    {
+      "path": "pages/category/index",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "分类标签",
+        "backgroundColor": "#F4F4F1"
+      }
+    },
+    {
+      "path": "pages/archive/index",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "归档箱",
+        "backgroundColor": "#F4F4F1"
+      }
+    },
+    {
+      "path": "pages/backup/index",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "数据备份",
+        "backgroundColor": "#F4F4F1"
+      }
+    },
+    {
+      "path": "pages/rules/index",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "重复规则",
+        "backgroundColor": "#F4F4F1"
+      }
+    },
+    {
+      "path": "pages/rules/editor",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "编辑规则",
+        "backgroundColor": "#F4F4F1"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "DChurch",
+    "navigationBarBackgroundColor": "#F4F4F1",
+    "backgroundColor": "#F4F4F1",
+    "backgroundColorTop": "#F4F4F1",
+    "backgroundColorBottom": "#F4F4F1"
+  },
+  "tabBar": {
+    "color": "#A3A6AC",
+    "selectedColor": "#17181A",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "fontSize": "10px",
+    "iconWidth": "24px",
+    "spacing": "3px",
+    "list": [
+      {
+        "pagePath": "pages/calendar/index",
+        "text": "日程",
+        "iconPath": "static/tab/calendar.png",
+        "selectedIconPath": "static/tab/calendar-active.png"
+      },
+      {
+        "pagePath": "pages/todo/index",
+        "text": "待办",
+        "iconPath": "static/tab/todo.png",
+        "selectedIconPath": "static/tab/todo-active.png"
+      },
+      {
+        "pagePath": "pages/mine/index",
+        "text": "我的",
+        "iconPath": "static/tab/mine.png",
+        "selectedIconPath": "static/tab/mine-active.png"
+      }
+    ]
+  }
+}
