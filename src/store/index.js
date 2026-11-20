@@ -316,11 +316,11 @@ export function updateRule(id, patch) {
     prev.intervalCount !== normalized.intervalCount ||
     prev.intervalUnit !== normalized.intervalUnit
 
+  const categoryIds = new Set(store.categories.map((c) => c.id))
   if (ruleChanged) {
     store.items = store.items.filter((item) => item.ruleId !== id || item.status === STATUS.DONE)
     const generated = generateItemsFromRule(normalized)
     if (!generated.ok) return { ok: false, error: generated.errors.join('；') }
-    const categoryIds = new Set(store.categories.map((c) => c.id))
     generated.items.forEach((item) => {
       if (item.categoryId && !categoryIds.has(item.categoryId)) item.categoryId = null
     })

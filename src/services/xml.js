@@ -109,7 +109,7 @@ export function serializeXml(snapshot) {
   lines.push(
     `  <settings weekStart="${settings.weekStart}" defaultView="${escapeXml(settings.defaultView)}" defaultReminder="${
       settings.defaultReminder === null || settings.defaultReminder === undefined ? '' : settings.defaultReminder
-    }" remindersEnabled="${settings.remindersEnabled ? 1 : 0}" autoArchiveDays="${settings.autoArchiveDays || 0}"/>`
+    }" remindersEnabled="${settings.remindersEnabled ? 1 : 0}" autoArchiveDays="${settings.autoArchiveDays || 0}" theme="${escapeXml(settings.theme || 'system')}"/>`
   )
   lines.push('</dchurch>')
   return lines.join('\n')
@@ -201,6 +201,7 @@ export function parseXml(text) {
       defaultReminder: attrs.defaultReminder === '' ? null : Number(attrs.defaultReminder),
       remindersEnabled: attrs.remindersEnabled !== '0',
       autoArchiveDays: Number(attrs.autoArchiveDays) || 0,
+      theme: attrs.theme || 'system',
     }
   }
 
