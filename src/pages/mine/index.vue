@@ -217,16 +217,16 @@ export default {
       this.storage = storageUsage()
     },
     goCategory() {
-      uni.navigateTo({ url: '/pages/category/index' })
+      this.$utils.route.go('/pages/category/index')
     },
     goRules() {
-      uni.navigateTo({ url: '/pages/rules/index' })
+      this.$utils.route.go('/pages/rules/index')
     },
     goArchive() {
-      uni.navigateTo({ url: '/pages/archive/index' })
+      this.$utils.route.go('/pages/archive/index')
     },
     goBackup() {
-      uni.navigateTo({ url: '/pages/backup/index' })
+      this.$utils.route.go('/pages/backup/index')
     },
     onThemeChange(event) {
       const option = this.themeOptions[Number(event.detail.value)]

@@ -63,7 +63,7 @@ export default {
   methods: {
     openEditor(rule) {
       const url = rule ? `/pages/rules/editor?id=${rule.id}` : '/pages/rules/editor'
-      uni.navigateTo({ url })
+      this.$utils.route.go(url)
     },
   },
 }

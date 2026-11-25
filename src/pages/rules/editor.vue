@@ -367,7 +367,7 @@ export default {
         return
       }
       toast(this.form.id ? '已更新' : `已创建，生成 ${result.count || 0} 个实例`)
-      uni.navigateBack()
+      this.$utils.route.back()
     },
     async onDelete() {
       const confirmMsg =
@@ -384,7 +384,7 @@ export default {
         return
       }
       toast(`已删除，移除 ${result.removed} 个实例`)
-      uni.navigateBack()
+      this.$utils.route.back()
     },
   },
 }

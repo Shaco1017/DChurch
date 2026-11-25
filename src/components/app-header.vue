@@ -21,6 +21,7 @@
 
 <script>
 import { STATUS_BAR_HEIGHT } from '@/utils/system'
+import { back, switchTab } from '@/utils/route'
 
 export default {
   name: 'AppHeader',
@@ -35,13 +36,10 @@ export default {
   methods: {
     onBack() {
       if (this.back) {
-        uni.navigateBack({
-          delta: 1,
-          fail: () => uni.switchTab({ url: '/pages/calendar/index' }),
-        })
+        back({ fail: () => switchTab({ url: '/pages/calendar/index' }).catch(() => {}) }).catch(() => {})
         return
       }
-      uni.switchTab({ url: '/pages/calendar/index' })
+      switchTab({ url: '/pages/calendar/index' }).catch(() => {})
     },
   },
 }
