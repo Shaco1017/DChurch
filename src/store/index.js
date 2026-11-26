@@ -298,12 +298,12 @@ export function addRule(draft) {
   return { ok: true, id: normalized.id, count: items.length }
 }
 
-/** 更新规则：允许改规则属性（重新生成实例）或只改模板属性 */
-export function updateRule(id, patch) {
-  const index = store.rules.findIndex((entry) => entry.id === id)
-  if (index === -1) return { ok: false, error: '规则不存在' }
-  const prev = store.rules[index]
-  const normalized = normalizeRule({ ...prev, ...patch, id })
+/**
+ * 应用一次规则改动（内部复用）：重新生成实例或批量更新未完成实例。
+ * 不负责 persist，也不负责写入 store.rules，由调用方统一处理。
+ */
+function applyRulePatch(prev, patch, categoryIds) {
+  const normalized = normalizeRule({ ...prev, ...patch, id: prev.id })
   if (!normalized) return { ok: false, error: '规则配置无效，请检查类型与日期' }
 
   // 规则属性变化时，删除旧实例并按新规则重新生成
@@ -316,9 +316,8 @@ export function updateRule(id, patch) {
     prev.intervalCount !== normalized.intervalCount ||
     prev.intervalUnit !== normalized.intervalUnit
 
-  const categoryIds = new Set(store.categories.map((c) => c.id))
   if (ruleChanged) {
-    store.items = store.items.filter((item) => item.ruleId !== id || item.status === STATUS.DONE)
+    store.items = store.items.filter((item) => item.ruleId !== prev.id || item.status === STATUS.DONE)
     const generated = generateItemsFromRule(normalized)
     if (!generated.ok) return { ok: false, error: generated.errors.join('；') }
     generated.items.forEach((item) => {
@@ -326,9 +325,9 @@ export function updateRule(id, patch) {
     })
     store.items.push(...generated.items)
   } else {
-    // 仅模板属性变化：批量更新关联实例（已完成的不动）
+    // 仅模板属性变化：批量更新关联实例（已完成/已归档的不动）
     store.items.forEach((item) => {
-      if (item.ruleId !== id || item.status === STATUS.DONE || item.archivedAt) return
+      if (item.ruleId !== prev.id || item.status === STATUS.DONE || item.archivedAt) return
       item.title = normalized.title
       item.note = normalized.note
       item.categoryId = normalized.categoryId && categoryIds.has(normalized.categoryId) ? normalized.categoryId : null
@@ -339,10 +338,52 @@ export function updateRule(id, patch) {
       item.updatedAt = Date.now()
     })
   }
+
   normalized.updatedAt = Date.now()
-  store.rules.splice(index, 1, normalized)
+  return { ok: true, rule: normalized, regenerated: ruleChanged }
+}
+
+/** 更新规则：允许改规则属性（重新生成实例）或只改模板属性 */
+export function updateRule(id, patch) {
+  const index = store.rules.findIndex((entry) => entry.id === id)
+  if (index === -1) return { ok: false, error: '规则不存在' }
+  const categoryIds = new Set(store.categories.map((c) => c.id))
+  const applied = applyRulePatch(store.rules[index], patch, categoryIds)
+  if (!applied.ok) return { ok: false, error: applied.error }
+
+  store.rules.splice(index, 1, applied.rule)
   persistNow()
-  return { ok: true, count: ruleChanged ? (store.items.filter((i) => i.ruleId === id).length) : 0 }
+  return { ok: true, count: applied.regenerated ? store.items.filter((i) => i.ruleId === id).length : 0 }
+}
+
+/**
+ * 批量修改多条规则的公共属性（时间、分类、优先级、提醒等）。
+ * 每条规则独立判断「重复方式是否变化」，变化的重建实例，否则只批量更新未完成实例。
+ */
+export function batchUpdateRules(ids, patch) {
+  const targetIds = Array.isArray(ids) ? ids.filter((id) => typeof id === 'string' && id) : []
+  if (!targetIds.length) return { ok: false, error: '请先选择要修改的规则' }
+  const categoryIds = new Set(store.categories.map((c) => c.id))
+  let updated = 0
+  let regenerated = 0
+  let firstError = ''
+
+  targetIds.forEach((id) => {
+    const index = store.rules.findIndex((entry) => entry.id === id)
+    if (index === -1) return
+    const applied = applyRulePatch(store.rules[index], patch, categoryIds)
+    if (!applied.ok) {
+      firstError = firstError || applied.error
+      return
+    }
+    store.rules.splice(index, 1, applied.rule)
+    updated += 1
+    if (applied.regenerated) regenerated += 1
+  })
+
+  if (!updated) return { ok: false, error: firstError || '没有可更新的规则' }
+  persistNow()
+  return { ok: true, updated, regenerated }
 }
 
 /**

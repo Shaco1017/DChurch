@@ -19,7 +19,7 @@
 
 <p align="center">
   <img alt="platform" src="https://img.shields.io/badge/platform-H5%20%7C%20%E5%B0%8F%E7%A8%8B%E5%BA%8F%20%7C%20iOS%20%7C%20Android-17181a" />
-  <img alt="version" src="https://img.shields.io/badge/version-Stable%201.0.0-7f9180" />
+  <img alt="version" src="https://img.shields.io/badge/version-Stable%201.0.1-7f9180" />
   <img alt="license" src="https://img.shields.io/badge/license-MIT-7f9180" />
 </p>
 
@@ -148,4 +148,4 @@ src/
 
 ---
 
-<sub>Stable 1.0.0 · 由一个个安静的夜晚拼起来的小工具</sub>
+<sub>Stable 1.0.1 · 由一个个安静的夜晚拼起来的小工具</sub>

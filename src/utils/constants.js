@@ -23,6 +23,13 @@ export const STATUS_MAP = STATUS_LIST.reduce((map, item) => {
   return map
 }, {})
 
+/**
+ * 重复规则自动覆盖的天数。
+ * 规则不再要求用户选择结束日期，保存时统一按「起始日期 + N 天」生成，
+ * 保证用户无需感知日期区间即可批量铺满未来日程。
+ */
+export const RULE_HORIZON_DAYS = 365
+
 export const REMINDER_OPTIONS = [
   { value: null, label: '不提醒' },
   { value: 0, label: '准时提醒' },

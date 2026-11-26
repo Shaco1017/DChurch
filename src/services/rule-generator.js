@@ -23,14 +23,20 @@ export function describeRule(rule) {
   if (rule.type === 'daily') return '每天'
   if (rule.type === 'weekly') {
     const names = ['日', '一', '二', '三', '四', '五', '六']
-    const days = Array.isArray(rule.weekdays) ? rule.weekdays.sort() : []
+    // 注意：这里发生在渲染期，必须复制后再排序，直接 sort 会修改 store 里的响应式数组，
+    // 触发「渲染中修改状态 → 重新渲染」的循环，表现为规则列表白屏
+    const days = Array.isArray(rule.weekdays)
+      ? rule.weekdays.filter((d) => Number.isInteger(d) && d >= 0 && d < 7).slice().sort((a, b) => a - b)
+      : []
     if (!days.length) return '无效的每周规则'
-    return '每周' + days.map((d) => names[d] || '').filter(Boolean).join('、')
+    return '每周' + days.map((d) => names[d]).join('、')
   }
   if (rule.type === 'monthly') {
-    const days = Array.isArray(rule.monthDays) ? rule.monthDays.slice() : []
+    const days = Array.isArray(rule.monthDays)
+      ? rule.monthDays.filter((d) => Number.isInteger(d) && d >= 1 && d <= 31).slice().sort((a, b) => a - b)
+      : []
     if (!days.length) return '无效的每月规则'
-    return '每月' + days.sort((a, b) => a - b).join('、') + ' 日'
+    return '每月' + days.join('、') + ' 日'
   }
   if (rule.type === 'interval') {
     const n = Number(rule.intervalCount) || 1
@@ -38,6 +44,26 @@ export function describeRule(rule) {
     return `每 ${n} ${unit}`
   }
   return '未知规则'
+}
+
+/**
+ * 重复特征签名：类型 + 具体重复日 + 间隔。
+ * 用于「同类规则」识别（例如所有每周一生效的规则共享同一签名）。
+ */
+export function ruleRecurrenceKey(rule) {
+  if (!rule) return ''
+  if (rule.type === 'weekly') {
+    const days = (rule.weekdays || []).filter((d) => Number.isInteger(d)).slice().sort((a, b) => a - b)
+    return `weekly:${days.join(',')}`
+  }
+  if (rule.type === 'monthly') {
+    const days = (rule.monthDays || []).filter((d) => Number.isInteger(d)).slice().sort((a, b) => a - b)
+    return `monthly:${days.join(',')}`
+  }
+  if (rule.type === 'interval') {
+    return `interval:${Number(rule.intervalCount) || 1}:${rule.intervalUnit || 'day'}`
+  }
+  return String(rule.type || '')
 }
 
 /**

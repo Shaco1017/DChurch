@@ -93,21 +93,15 @@
 
       <view class="card section">
         <text class="section-title">生效日期</text>
-        <view class="row-between">
-          <view class="date-pick">
-            <text class="pick-label">起始</text>
-            <picker mode="date" :value="form.startDate" @change="onStartChange">
-              <text class="pick-value">{{ form.startDate }}</text>
-            </picker>
-          </view>
-          <text class="arrow">至</text>
-          <view class="date-pick">
-            <text class="pick-label">结束</text>
-            <picker mode="date" :value="form.endDate" @change="onEndChange">
-              <text class="pick-value">{{ form.endDate }}</text>
-            </picker>
-          </view>
+        <view class="date-pick">
+          <text class="pick-label">从</text>
+          <picker mode="date" :value="form.startDate" @change="onStartChange">
+            <text class="pick-value">{{ form.startDate }}</text>
+          </picker>
         </view>
+        <text class="section-hint">
+          无需选择结束日期：保存后会自动生成未来 {{ horizonDays }} 天内所有符合规则的日程。
+        </text>
       </view>
 
       <view class="card section">
@@ -133,7 +127,7 @@
 
         <view class="row">
           <text class="row-label">分类</text>
-          <picker range="categoryNames" @change="onCategoryChange">
+          <picker :range="categoryNames" @change="onCategoryChange">
             <view class="picker-view">
               <text :class="{ placeholder: !form.categoryId }">{{ selectedCategoryName }}</text>
               <view class="chevron chevron-left" style="transform: rotate(-135deg); width: 12rpx; height: 12rpx;"></view>
@@ -158,9 +152,9 @@
 
         <view class="row">
           <text class="row-label">提醒</text>
-          <picker range="reminderLabels" @change="onReminderChange">
+          <picker :range="reminderLabels" @change="onReminderChange">
             <view class="picker-view">
-              <text>{{ reminderLabels[form.reminderIndex] }}</text>
+              <text>{{ reminderLabels[reminderIndex] }}</text>
               <view class="chevron chevron-left" style="transform: rotate(-135deg); width: 12rpx; height: 12rpx;"></view>
             </view>
           </picker>
@@ -216,7 +210,7 @@ import AppHeader from '@/components/app-header.vue'
 import { addRule, deleteRule, initStore, store, updateRule } from '@/store'
 import { confirmDialog, toast } from '@/utils/ui'
 import { generateItemsFromRule, RULE_TYPES } from '@/services/rule-generator'
-import { REMINDER_OPTIONS } from '@/utils/constants'
+import { REMINDER_OPTIONS, RULE_HORIZON_DAYS } from '@/utils/constants'
 import { todayKey, addDays } from '@/utils/date'
 
 const WEEKDAY_LABELS = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
@@ -233,14 +227,13 @@ const UNIT_OPTIONS = [
 
 function defaultForm() {
   const today = todayKey()
-  const end = addDays(today, 90)
   return {
     id: null,
     title: '',
     note: '',
     type: 'daily',
     startDate: today,
-    endDate: end,
+    endDate: addDays(today, RULE_HORIZON_DAYS),
     startTime: null,
     endTime: null,
     categoryId: null,
@@ -278,6 +271,9 @@ export default {
     priorityOptions() {
       return PRIORITY_OPTIONS
     },
+    horizonDays() {
+      return RULE_HORIZON_DAYS
+    },
     intervalCount: {
       get() { return this.form.intervalCount },
       set(v) { this.form.intervalCount = Math.max(1, Math.min(365, Number(v) || 1)) },
@@ -291,27 +287,24 @@ export default {
       return hit ? hit.name : '不分类'
     },
     reminderLabels() {
-      return ['不提醒', ...REMINDER_OPTIONS.filter((r) => r !== null).map((r) => {
-        if (r === 0) return '准时'
-        if (r < 60) return `提前 ${r} 分钟`
-        if (r === 60) return '提前 1 小时'
-        if (r === 1440) return '提前 1 天'
-        return `提前 ${Math.round(r / 60)} 小时`
-      })]
+      // REMINDER_OPTIONS 是 { value, label } 对象数组，直接取 label 拼接
+      return ['不提醒', ...REMINDER_OPTIONS.filter((item) => item.value !== null).map((item) => item.label)]
     },
     reminderIndex() {
       if (this.form.reminder === null || this.form.reminder === undefined) return 0
-      const list = [null, ...REMINDER_OPTIONS.filter((r) => r !== null)]
-      const idx = list.indexOf(this.form.reminder)
+      const idx = REMINDER_OPTIONS.findIndex((item) => item.value === this.form.reminder)
       return idx === -1 ? 0 : idx
     },
     preview() {
-      const base = { ok: true, count: 0, errors: [], desc: '' }
       if (!this.form.title.trim()) return { ok: false, errors: ['请填写规则名称'] }
-      const draft = JSON.parse(JSON.stringify(this.form))
+      // 结束日期不再由用户选择，统一按「起始日期 + 覆盖天数」推导
+      const draft = {
+        ...JSON.parse(JSON.stringify(this.form)),
+        endDate: addDays(this.form.startDate, RULE_HORIZON_DAYS),
+      }
       const result = generateItemsFromRule(draft)
       if (!result.ok) return { ok: false, errors: result.errors }
-      const desc = `${this.form.startDate} 至 ${this.form.endDate}`
+      const desc = `自 ${this.form.startDate} 起 · 自动覆盖未来 ${RULE_HORIZON_DAYS} 天`
       return { ok: true, count: result.count, errors: [], desc }
     },
   },
@@ -325,10 +318,8 @@ export default {
   methods: {
     onStartChange(e) {
       this.form.startDate = e.detail.value
-      if (this.form.endDate < this.form.startDate) this.form.endDate = this.form.startDate
-    },
-    onEndChange(e) {
-      this.form.endDate = e.detail.value
+      // 结束日期始终按覆盖天数自动跟随，用户无需关心
+      this.form.endDate = addDays(this.form.startDate, RULE_HORIZON_DAYS)
     },
     toggleWeekday(d) {
       const idx = this.form.weekdays.indexOf(d)
@@ -347,15 +338,15 @@ export default {
     },
     onReminderChange(e) {
       const idx = Number(e.detail.value)
-      const list = [null, ...REMINDER_OPTIONS.filter((r) => r !== null)]
-      this.form.reminder = list[idx]
+      const option = REMINDER_OPTIONS[idx]
+      this.form.reminder = option ? option.value : null
     },
     async onSave() {
       if (!this.preview.ok) {
         toast(this.preview.errors[0])
         return
       }
-      const payload = { ...this.form }
+      const payload = { ...this.form, endDate: addDays(this.form.startDate, RULE_HORIZON_DAYS) }
       let result
       if (this.form.id) {
         result = updateRule(this.form.id, payload)
@@ -367,7 +358,10 @@ export default {
         return
       }
       toast(this.form.id ? '已更新' : `已创建，生成 ${result.count || 0} 个实例`)
-      this.$utils.route.back()
+      // 直接通过链接进入时没有上一页，兜底回到规则列表，避免停留在编辑页
+      this.$utils.route
+        .back({ fail: () => this.$utils.route.replace('/pages/rules/index') })
+        .catch(() => {})
     },
     async onDelete() {
       const confirmMsg =
@@ -384,7 +378,9 @@ export default {
         return
       }
       toast(`已删除，移除 ${result.removed} 个实例`)
-      this.$utils.route.back()
+      this.$utils.route
+        .back({ fail: () => this.$utils.route.replace('/pages/rules/index') })
+        .catch(() => {})
     },
   },
 }
@@ -445,6 +441,14 @@ export default {
   font-size: 23rpx;
   color: var(--text-3);
   letter-spacing: 0.6rpx;
+}
+
+.section-hint {
+  display: block;
+  margin-top: 14rpx;
+  font-size: 22rpx;
+  line-height: 1.6;
+  color: var(--text-3);
 }
 
 .seg {

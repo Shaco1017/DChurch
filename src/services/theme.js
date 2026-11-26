@@ -42,6 +42,8 @@ function syncNativeChrome(theme) {
       selectedColor: dark ? '#e7e7e2' : '#17181a',
       backgroundColor: dark ? '#1b1e20' : '#ffffff',
       borderStyle: dark ? 'black' : 'white',
+      // H5 在非 tabBar 页面调用会返回 rejected Promise，显式忽略避免控制台报错
+      fail: () => {},
     })
   } catch (e) {
     // 非 tabBar 页面或平台不支持时忽略

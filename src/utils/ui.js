@@ -4,9 +4,10 @@ export function toast(title, duration = 1800) {
 
 export function tapFeedback() {
   try {
-    uni.vibrateShort({})
+    // 部分平台不支持震动：传 fail 回调，避免 H5 返回的 rejected Promise 变成未处理异常
+    uni.vibrateShort({ fail: () => {} })
   } catch (error) {
-    // 部分平台不支持震动，静默忽略
+    // 静默忽略
   }
 }
 

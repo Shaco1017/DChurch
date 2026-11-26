@@ -2,8 +2,8 @@
     "name" : "DChurch",
     "appid" : "__UNI__DC8B8E0",
     "description" : "DChurch · 纯本地日程与待办应用，数据仅保存在设备端",
-    "versionName" : "1.0.0",
-    "versionCode" : "100",
+    "versionName" : "1.0.1",
+    "versionCode" : "101",
     "transformPx" : false,
     "app-plus" : {
         "usingComponents" : true,
@@ -11,7 +11,7 @@
         "compilerVersion" : 3,
         "splashscreen" : {
             "alwaysShowBeforeRender" : true,
-            "waiting" : true,
+            "waiting" : false,
             "autoclose" : true,
             "delay" : 0
         },
@@ -19,33 +19,33 @@
         "distribute" : {
             "icons" : {
                 "android" : {
-                    "hdpi" : "D:/WorkSpace/DChurch/src/static/icon/72.png",
-                    "xhdpi" : "D:/WorkSpace/DChurch/src/static/icon/96.png",
-                    "xxhdpi" : "D:/WorkSpace/DChurch/src/static/icon/144.png",
-                    "xxxhdpi" : "D:/WorkSpace/DChurch/src/static/icon/192.png"
+                    "hdpi" : "src/static/icon/72.png",
+                    "xhdpi" : "src/static/icon/96.png",
+                    "xxhdpi" : "src/static/icon/144.png",
+                    "xxxhdpi" : "src/static/icon/192.png"
                 },
                 "ios" : {
-                    "appstore" : "D:/WorkSpace/DChurch/src/static/icon/1024.png",
+                    "appstore" : "src/static/icon/1024.png",
                     "ipad" : {
-                        "app" : "D:/WorkSpace/DChurch/src/static/icon/76.png",
-                        "app@2x" : "D:/WorkSpace/DChurch/src/static/icon/152.png",
-                        "proapp@2x" : "D:/WorkSpace/DChurch/src/static/icon/167.png",
-                        "spotlight" : "D:/WorkSpace/DChurch/src/static/icon/40.png",
-                        "spotlight@2x" : "D:/WorkSpace/DChurch/src/static/icon/80.png",
-                        "settings" : "D:/WorkSpace/DChurch/src/static/icon/29.png",
-                        "settings@2x" : "D:/WorkSpace/DChurch/src/static/icon/58.png",
-                        "notification" : "D:/WorkSpace/DChurch/src/static/icon/20.png",
-                        "notification@2x" : "D:/WorkSpace/DChurch/src/static/icon/40.png"
+                        "app" : "src/static/icon/76.png",
+                        "app@2x" : "src/static/icon/152.png",
+                        "proapp@2x" : "src/static/icon/167.png",
+                        "spotlight" : "src/static/icon/40.png",
+                        "spotlight@2x" : "src/static/icon/80.png",
+                        "settings" : "src/static/icon/29.png",
+                        "settings@2x" : "src/static/icon/58.png",
+                        "notification" : "src/static/icon/20.png",
+                        "notification@2x" : "src/static/icon/40.png"
                     },
                     "iphone" : {
-                        "app@2x" : "D:/WorkSpace/DChurch/src/static/icon/120.png",
-                        "app@3x" : "D:/WorkSpace/DChurch/src/static/icon/180.png",
-                        "spotlight@2x" : "D:/WorkSpace/DChurch/src/static/icon/80.png",
-                        "spotlight@3x" : "D:/WorkSpace/DChurch/src/static/icon/120.png",
-                        "settings@2x" : "D:/WorkSpace/DChurch/src/static/icon/58.png",
-                        "settings@3x" : "D:/WorkSpace/DChurch/src/static/icon/87.png",
-                        "notification@2x" : "D:/WorkSpace/DChurch/src/static/icon/40.png",
-                        "notification@3x" : "D:/WorkSpace/DChurch/src/static/icon/60.png"
+                        "app@2x" : "src/static/icon/120.png",
+                        "app@3x" : "src/static/icon/180.png",
+                        "spotlight@2x" : "src/static/icon/80.png",
+                        "spotlight@3x" : "src/static/icon/120.png",
+                        "settings@2x" : "src/static/icon/58.png",
+                        "settings@3x" : "src/static/icon/87.png",
+                        "notification@2x" : "src/static/icon/40.png",
+                        "notification@3x" : "src/static/icon/60.png"
                     }
                 }
             },
@@ -59,7 +59,16 @@
             "ios" : {
                 "dSYMs" : false
             },
-            "sdkConfigs" : {}
+            "sdkConfigs" : {},
+            "splashscreen" : {
+                "androidStyle" : "default",
+                "iosStyle" : "common",
+                "android" : {
+                    "hdpi" : "src/static/splash/android-hdpi-480x762.png",
+                    "xhdpi" : "src/static/splash/android-xhdpi-720x1242.png",
+                    "xxhdpi" : "src/static/splash/android-xxhdpi-1080x1882.png"
+                }
+            }
         }
     },
     "quickapp" : {},
